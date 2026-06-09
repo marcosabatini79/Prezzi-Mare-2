@@ -1,8 +1,8 @@
 # prezzi-mare-2
 
-App PWA per richieste di disponibilità e prenotazione appartamenti **Casa Vista Mare** – Vasto Marina.
+App PWA per richieste di disponibilità e prenotazione appartamenti **Casa Mare** – Vasto Marina.
 
-Pubblicata su GitHub Pages: https://marcosabatini79.github.io/prezzi-mare-2/
+Pubblicata su GitHub Pages: https://marcosabatini79.github.io/Prezzi-Mare-2/
 
 ## Installazione su smartphone
 
