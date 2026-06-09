@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Casa Vista Mare Vasto Marina - Prenotazioni</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#21808D">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="CasaMare">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js');
+      });
+    }
+  </script>
+  
+  <style>
+    .card-header {
+      padding: 8px 16px !important;
+      border-bottom: 1px solid var(--color-card-border-inner);
+      background: var(--color-bg-8);
+    }
+
+    .card-title {
+      margin-bottom: 0 !important;
+    }
+  </style>
+
+  <!-- il resto del tuo style già presente va qui sotto -->
+    <style>
+        :root {
+            /* Primitive Color Tokens */
+            --color-white: rgba(255, 255, 255, 1);
+            --color-black: rgba(0, 0, 0, 1);
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-gray-400: rgba(119, 124, 124, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+            --color-teal-400: rgba(45, 166, 178, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-teal-700: rgba(26, 104, 115, 1);
+            --color-teal-800: rgba(41, 150, 161, 1);
+            --color-red-400: rgba(255, 84, 89, 1);
+            --color-red-500: rgba(192, 21, 47, 1);
+            --color-orange-400: rgba(230, 129, 97, 1);
+            --color-orange-500: rgba(168, 75, 47, 1);
+
+            /* RGB versions for opacity control */
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-slate-500-rgb: 98, 108, 113;
+            --color-red-500-rgb: 192, 21, 47;
+            --color-red-400-rgb: 255, 84, 89;
+            --color-orange-500-rgb: 168, 75, 47;
+            --color-orange-400-rgb: 230, 129, 97;
+
+            /* Background color tokens (Light Mode) */
+            --color-bg-1: rgba(59, 130, 246, 0.08);
+            --color-bg-2: rgba(245, 158, 11, 0.08);
+            --color-bg-3: rgba(34, 197, 94, 0.08);
+            --color-bg-4: rgba(239, 68, 68, 0.08);
+            --color-bg-5: rgba(147, 51, 234, 0.08);
+            --color-bg-6: rgba(249, 115, 22, 0.08);
+            --color-bg-7: rgba(236, 72, 153, 0.08);
+            --color-bg-8: rgba(6, 182, 212, 0.08);
+
+            /* Semantic Color Tokens (Light Mode) */
+            --color-background: rgba(248, 253, 255, 1);
+            --color-surface: var(--color-white);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-primary-active: var(--color-teal-700);
+            --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+            --color-border: rgba(var(--color-teal-500-rgb), 0.15);
+            --color-btn-primary-text: var(--color-white);
+            --color-card-border: rgba(var(--color-teal-500-rgb), 0.1);
+            --color-card-border-inner: rgba(var(--color-teal-500-rgb), 0.08);
+            --color-error: var(--color-red-500);
+            --color-success: rgba(34, 197, 94, 1);
+            --color-warning: var(--color-orange-500);
+            --color-info: var(--color-slate-500);
+            --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+            --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+            /* Typography */
+            --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-size-xs: 12px;
+            --font-size-sm: 14px;
+            --font-size-base: 16px;
+            --font-size-lg: 18px;
+            --font-size-xl: 20px;
+            --font-size-2xl: 24px;
+            --font-size-3xl: 30px;
+            --font-size-4xl: 36px;
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+            --line-height-tight: 1.25;
+            --line-height-normal: 1.5;
+            --letter-spacing-tight: -0.025em;
+
+            /* Spacing */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 20px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-10: 40px;
+            --space-12: 48px;
+            --space-16: 64px;
+            --space-20: 80px;
+
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-base: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --radius-2xl: 24px;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.16);
+
+            /* Animation */
+            --duration-fast: 150ms;
+            --duration-normal: 300ms;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: var(--line-height-normal);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 25vh;
+            min-height: 200px;
+            background: linear-gradient(135deg, var(--color-teal-600) 0%, var(--color-teal-400) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><path fill="%23ffffff" fill-opacity="0.1" d="M0,320L48,298.7C96,277,192,235,288,213.3C384,192,480,192,576,202.7C672,213,768,235,864,218.7C960,203,1056,149,1152,149.3C1248,149,1344,203,1392,229.3L1440,256L1440,400L1392,400C1344,400,1248,400,1152,400C1056,400,960,400,864,400C768,400,672,400,576,400C480,400,384,400,288,400C192,400,96,400,48,400L0,400Z"></path></svg>') center bottom/cover no-repeat;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 var(--space-4);
+        }
+
+        .hero-title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-white);
+            margin-bottom: var(--space-2);
+            letter-spacing: var(--letter-spacing-tight);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle {
+            font-size: var(--font-size-base);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0;
+            font-weight: var(--font-weight-medium);
+        }
+
+        .hero-description {
+            display: none;
+        }
+
+        /* Ocean waves animation */
+        .waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="%23ffffff" fill-opacity="0.1"></path></svg>') repeat-x;
+            animation: wave 10s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1200px; }
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 var(--space-4);
+        }
+
+        /* Main content */
+        .main-content {
+            transform: translateY(-20px);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Card component */
+        .card {
+            background: var(--color-surface);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            margin-bottom: var(--space-6);
+            border: 1px solid var(--color-card-border);
+            transition: all var(--duration-normal) var(--ease-out);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            padding: var(--space-6);
+            border-bottom: 1px solid var(--color-card-border-inner);
+            background: var(--color-bg-8);
+        }
+
+        .card-title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text);
+            margin-bottom: var(--space-1);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .card-subtitle {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .card-body {
+            padding: var(--space-6);
+        }
+
+        /* Calendar styles */
+        .calendar-container {
+            margin-top: var(--space-4);
+        }
+
+        /* Month navigation */
+        .month-navigation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-4);
+            padding: var(--space-3);
+            background: var(--color-bg-1);
+            border-radius: var(--radius-base);
+        }
+
+        .nav-button {
+            background: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-2) var(--space-3);
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-out);
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text);
+        }
+
+        .nav-button:hover {
+            background: var(--color-primary);
+            color: var(--color-btn-primary-text);
+            border-color: var(--color-primary);
+            transform: translateY(-1px);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .nav-button:disabled:hover {
+            background: var(--color-surface);
+            color: var(--color-text);
+            border-color: var(--color-border);
+        }
+
+        .current-month-display {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
+            text-transform: capitalize;
+        }
+
+        .calendar-legend { display: none; }
+
+        .calendar-month {
+            margin-bottom: var(--space-5);
+        }
+
+        .single-calendar {
+            background: var(--color-bg-8);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            border: 1px solid var(--color-border);
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0;
+            margin-bottom: 0;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .calendar-weekday {
+            text-align: center;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-secondary);
+            padding: var(--space-2) var(--space-1);
+            background: var(--color-bg-8);
+            border-right: 1px solid var(--color-card-border-inner);
+        }
+        .calendar-weekday:last-child { border-right: none; }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0;
+            border-left: 1px solid var(--color-card-border-inner);
+            border-bottom: 1px solid var(--color-card-border-inner);
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            cursor: default;
+            transition: all var(--duration-fast) var(--ease-out);
+            position: relative;
+            padding: var(--space-1);
+            border-right: 1px solid var(--color-card-border-inner);
+            border-top: 1px solid var(--color-card-border-inner);
+            background: var(--color-bg-8);
+            color: var(--color-text);
+        }
+
+        .calendar-day-number {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-bold);
+            line-height: 1;
+        }
+
+        .calendar-day-price {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+            opacity: 0.8;
+            margin-top: 2px;
+            line-height: 1;
+        }
+
+        .calendar-day.today {
+            border: 2px solid var(--color-primary);
+            font-weight: var(--font-weight-bold);
+        }
+
+        /* Form styles */
+        .form-section {
+            background: var(--color-surface);
+        }
+
+        .form-grid {
+            display: grid;
+            gap: var(--space-4);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-4);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text);
+            margin-bottom: var(--space-2);
+        }
+
+        .form-label .required {
+            color: var(--color-error);
+        }
+
+        .form-input {
+            padding: var(--space-3) var(--space-4);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-base);
+            font-size: var(--font-size-base);
+            background: var(--color-surface);
+            color: var(--color-text);
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-focus-ring);
+        }
+
+        .form-input::placeholder {
+            color: var(--color-text-secondary);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+            font-family: var(--font-family-base);
+        }
+
+        /* Price display */
+        .price-display {
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            margin: var(--space-4) 0;
+            display: none;
+            animation: slideIn var(--duration-normal) var(--ease-out);
+        }
+
+        .price-display.show {
+            display: block;
+        }
+
+        .price-display-title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-success);
+            margin-bottom: var(--space-3);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .price-info {
+            color: var(--color-success);
+            line-height: var(--line-height-normal);
+        }
+
+        .price-total {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            margin-top: var(--space-3);
+        }
+
+        /* Button styles */
+        .btn {
+            padding: var(--space-4) var(--space-6);
+            background: var(--color-primary);
+            color: var(--color-btn-primary-text);
+            border: none;
+            border-radius: var(--radius-base);
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-out);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover:not(:disabled) {
+            background: var(--color-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn:active:not(:disabled) {
+            background: var(--color-primary-active);
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-teal-400) 100%);
+            font-size: var(--font-size-lg);
+            padding: var(--space-5) var(--space-8);
+            border-radius: var(--radius-xl);
+            font-weight: var(--font-weight-bold);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: linear-gradient(135deg, var(--color-primary-hover) 0%, var(--color-teal-500) 100%);
+        }
+
+        /* Alert styles */
+        .alert {
+            padding: var(--space-4);
+            border-radius: var(--radius-base);
+            margin: var(--space-4) 0;
+            font-weight: var(--font-weight-medium);
+            display: none;
+            animation: slideIn var(--duration-normal) var(--ease-out);
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-success {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--color-success);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .alert-error {
+            background: rgba(var(--color-red-500-rgb), 0.1);
+            color: var(--color-error);
+            border: 1px solid rgba(var(--color-red-500-rgb), 0.2);
+        }
+
+        /* Loading animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: var(--space-6);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(var(--color-teal-500-rgb), 0.2);
+            border-top: 4px solid var(--color-primary);
+            border-radius: var(--radius-full);
+            animation: spin 1s linear infinite;
+            margin: 0 auto var(--space-3);
+        }
+
+        .loading-text {
+            color: var(--color-text-secondary);
+            font-weight: var(--font-weight-medium);
+        }
+
+        /* Animations */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* SVG Icons */
+        .icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .hero {
+                height: 50vh;
+                min-height: 300px;
+            }
+
+            .hero-title {
+                font-size: var(--font-size-3xl);
+            }
+
+            .hero-subtitle {
+                font-size: var(--font-size-base);
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .calendar-legend {
+                flex-direction: column;
+                gap: var(--space-2);
+            }
+
+            .calendar-day {
+                font-size: var(--font-size-xs);
+            }
+
+            .container {
+                padding: 0 var(--space-3);
+            }
+
+            .main-content {
+                transform: translateY(-20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: var(--font-size-2xl);
+            }
+
+            .card-body,
+            .card-header {
+                padding: var(--space-4);
+            }
+            
+            .calendar-day {
+                font-size: 10px;
+            }
+            
+            .calendar-day-number {
+                font-size: var(--font-size-sm);
+            }
+            
+            .calendar-day-price {
+                font-size: 10px;
+            }
+        }
+
+        /* ── Apartment Selection Screen ── */
+        .apt-selection-overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, var(--color-teal-600) 0%, var(--color-teal-400) 60%, var(--color-teal-300) 100%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-6);
+            overflow-y: auto;
+        }
+        .apt-selection-overlay.hidden { display: none; }
+
+        .apt-sel-logo {
+            font-size: 56px;
+            margin-bottom: var(--space-3);
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+        .apt-sel-title {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            color: white;
+            text-align: center;
+            margin-bottom: var(--space-2);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            letter-spacing: var(--letter-spacing-tight);
+        }
+        .apt-sel-subtitle {
+            font-size: var(--font-size-lg);
+            color: rgba(255,255,255,0.85);
+            text-align: center;
+            margin-bottom: var(--space-8);
+            font-weight: var(--font-weight-medium);
+        }
+        /* Mobile-first: 1 colonna di default, 2 colonne solo su schermi larghi */
+        .apt-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-3);
+            width: 100%;
+            max-width: 520px;
+        }
+        @media (min-width: 540px) {
+            .apt-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-4);
+                max-width: 600px;
+            }
+        }
+        .apt-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: var(--radius-xl);
+            padding: var(--space-5) var(--space-5);
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-out);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            /* Layout orizzontale: icona a sx, testo a dx */
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            text-align: left;
+            gap: var(--space-4);
+            min-height: 90px;
+        }
+        .apt-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0);
+            transition: background var(--duration-fast) var(--ease-out);
+        }
+        .apt-card:hover { 
+            background: rgba(255,255,255,0.28);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+            border-color: rgba(255,255,255,0.5);
+        }
+        .apt-card:active { transform: translateY(-1px); }
+        .apt-card-icon {
+            font-size: 42px;
+            margin-bottom: 0;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+        .apt-card-content {
+            flex: 1;
+        }
+        .apt-card-name {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 2px;
+        }
+        .apt-card-desc {
+            font-size: var(--font-size-sm);
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 2px;
+        }
+        .apt-card-content {
+            flex: 1;
+        }
+        .apt-card-address {
+            font-size: var(--font-size-xs);
+            color: rgba(255,255,255,0.75);
+            margin-top: var(--space-2);
+            margin-bottom: var(--space-1);
+            line-height: 1.4;
+        }
+        .apt-card-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            border-radius: var(--radius-full);
+            padding: 2px 10px;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            margin-top: var(--space-2);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        /* Badge appartamento selezionato nell'header */
+        .apt-badge-header {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: var(--radius-full);
+            padding: var(--space-1) var(--space-4);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: white;
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-out);
+            margin-top: var(--space-3);
+        }
+        .apt-badge-header:hover {
+            background: rgba(255,255,255,0.28);
+        }
+
+
+        /* ── Language Toggle ── */
+        .lang-toggle {
+            position: fixed;
+            top: 14px;
+            right: 16px;
+            z-index: 10000;
+            display: flex;
+            gap: 4px;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: var(--radius-full);
+            padding: 3px;
+            backdrop-filter: blur(8px);
+        }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-full);
+            padding: 5px 12px;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            color: rgba(255,255,255,0.75);
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-out);
+            letter-spacing: 0.5px;
+        }
+        .lang-btn.active {
+            background: white;
+            color: var(--color-teal-600);
+            box-shadow: var(--shadow-sm);
+        }
+        .lang-btn:not(.active):hover {
+            color: white;
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* ── Calendario prezzi con selezione range ── */
+        .calendar-day {
+            cursor: pointer;
+            user-select: none;
+        }
+        .calendar-day.past {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+        .calendar-day:not(.past):hover {
+            background: rgba(var(--color-teal-500-rgb), 0.18);
+            border-color: var(--color-primary);
+            transform: scale(1.08);
+        }
+        .calendar-day.selected-start,
+        .calendar-day.selected-end {
+            background: var(--color-primary) !important;
+            color: white !important;
+            border-color: var(--color-primary-active) !important;
+            font-weight: var(--font-weight-bold);
+        }
+        .calendar-day.selected-start .calendar-day-price,
+        .calendar-day.selected-end .calendar-day-price {
+            color: rgba(255,255,255,0.85);
+        }
+        .calendar-day.in-range {
+            background: rgba(var(--color-teal-500-rgb), 0.12) !important;
+            border-color: rgba(var(--color-teal-500-rgb), 0.3) !important;
+            border-radius: 0;
+        }
+        .calendar-day.selected-start { background: var(--color-primary) !important; color: white !important; }
+        .calendar-day.selected-end   { background: var(--color-primary) !important; color: white !important; }
+        .cal-hint {
+            text-align: center;
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+            padding: var(--space-2) 0 var(--space-3);
+            font-style: italic;
+        }
+        .calendar-day.summer-day {
+            border: 2px solid rgba(245, 158, 11, 0.5);
+        }
+        .summer-badge {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.15);
+            color: #92400e;
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            border-radius: var(--radius-full);
+            padding: 2px 9px;
+            font-size: 11px;
+            font-weight: var(--font-weight-semibold);
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+        /* ── Banner tassa di soggiorno ── */
+        .tourist-tax-banner {
+            background: linear-gradient(135deg, rgba(245,158,11,0.10) 0%, rgba(245,158,11,0.06) 100%);
+            border: 1px solid rgba(245,158,11,0.35);
+            border-left: 4px solid #f59e0b;
+            border-radius: var(--radius-base);
+            padding: var(--space-4) var(--space-5);
+            margin-bottom: var(--space-6);
+        }
+        .tourist-tax-banner h3 {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+            color: #92400e;
+            margin-bottom: var(--space-2);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+        .tourist-tax-banner p {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
+        .tourist-tax-banner strong { color: var(--color-text); }
+
+        /* ── Checkbox biancheria ── */
+        .linen-option {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            background: linear-gradient(135deg, rgba(33,128,141,0.06) 0%, rgba(33,128,141,0.03) 100%);
+            border: 1px solid rgba(var(--color-teal-500-rgb), 0.25);
+            border-left: 4px solid var(--color-primary);
+            border-radius: var(--radius-base);
+            padding: var(--space-4) var(--space-5);
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+        .linen-option:hover {
+            background: linear-gradient(135deg, rgba(33,128,141,0.10) 0%, rgba(33,128,141,0.06) 100%);
+        }
+        .linen-option input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: var(--color-primary);
+        }
+        .linen-option-text {
+            flex: 1;
+        }
+        .linen-option-title {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text);
+            margin-bottom: 2px;
+        }
+        .linen-option-detail {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+        .linen-option-price {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
+            white-space: nowrap;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Language Toggle -->
+    <div class="lang-toggle" id="langToggle">
+        <button class="lang-btn active" onclick="setLang('it')" id="btnIT">🇮🇹 IT</button>
+        <button class="lang-btn" onclick="setLang('en')" id="btnEN">🇬🇧 EN</button>
+    </div>
+
+
+    <!-- ══ SCHERMATA SELEZIONE APPARTAMENTO ══ -->
+    <div class="apt-selection-overlay" id="aptSelectionOverlay">
+        <div class="apt-sel-logo">🏖️</div>
+        <h1 class="apt-sel-title">Casa Vista Mare<br>Vasto Marina</h1>
+        <p class="apt-sel-subtitle">Seleziona l'appartamento che desideri prenotare</p>
+        <div class="apt-grid" style="grid-template-columns: 1fr; max-width: 420px;">
+            <div class="apt-card" onclick="selectApartment('Casa Vista Mare')">
+                <div class="apt-card-icon">🏠</div>
+                <div class="apt-card-content">
+                    <div class="apt-card-name">Casa Vista Mare</div>
+                    <div class="apt-card-desc">Appartamento — Vista mare</div>
+                    <div class="apt-card-address">📍 Via Eduardo De Filippo — Piano 4°</div>
+                    <span class="apt-card-badge">Max 4 ospiti</span>
+                </div>
+            </div>
+            <div class="apt-card" onclick="selectApartment('Casa al Mare')">
+                <div class="apt-card-icon">🛖</div>
+                <div class="apt-card-content">
+                    <div class="apt-card-name">Casa al Mare</div>
+                    <div class="apt-card-desc">Appartamento al Mare</div>
+                    <div class="apt-card-address">📍 Viale Dalmazia 173 — Piano Terra</div>
+                    <span class="apt-card-badge">Max 4 ospiti</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="waves"></div>
+        <div class="hero-content">
+            <h1 class="hero-title" id="heroTitle">🏖️ Casa Vista Mare Vasto Marina</h1>
+            <p class="hero-subtitle">Vasto Marina, Abruzzo</p>
+            <button class="apt-badge-header" onclick="changeApartment()" id="changeAptBtn">🔄 Cambia appartamento</button>
+            <p class="hero-description">Appartamento fronte mare con vista mozzafiato sulla Costa dei Trabocchi. Il tuo rifugio perfetto per una vacanza indimenticabile.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Calendario Prezzi Card -->
+            <div class="card" id="calendarCard">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M7,15H9C9,16.08 10.37,17 12,17C13.63,17 15,16.08 15,15C15,13.9 13.96,13.5 11.76,12.97C9.64,12.44 7,11.78 7,9C7,7.21 8.47,5.69 10.5,5.18V3H13.5V5.18C15.53,5.69 17,7.21 17,9H15C15,7.92 13.63,7 12,7C10.37,7 9,7.92 9,9C9,10.1 10.04,10.5 12.24,11.03C14.36,11.56 17,12.22 17,15C17,16.79 15.53,18.31 13.5,18.82V21H10.5V18.82C8.47,18.31 7,16.79 7,15Z"/>
+                        </svg>
+                        <span data-i18n="card_cal_prices">Prezzi per notte</span>
+                    </h2>
+                    <p class="card-subtitle" data-i18n="card_cal_prices_sub">Seleziona le date direttamente dal calendario</p>
+                </div>
+                <div class="card-body">
+                    <p class="cal-hint" id="calHint" data-i18n="cal_hint_checkin">Clicca il giorno di arrivo (check-in)</p>
+                    <!-- Month Navigation -->
+                    <div class="month-navigation">
+                        <button class="nav-button" id="prevMonthBtn" onclick="prevMonth()">
+                            <svg class="icon" viewBox="0 0 24 24" style="width:16px;height:16px;">
+                                <path d="M15.41,16.58L10.83,12L15.41,7.42L14,6L8,12L14,18L15.41,16.58Z"/>
+                            </svg>
+                            <span id="prevMonthLabel" data-i18n="prev_month">Precedente</span>
+                        </button>
+                        <div class="current-month-display" id="currentMonthDisplay">—</div>
+                        <button class="nav-button" id="nextMonthBtn" onclick="nextMonth()">
+                            <span id="nextMonthLabel" data-i18n="next_month">Successivo</span>
+                            <svg class="icon" viewBox="0 0 24 24" style="width:16px;height:16px;">
+                                <path d="M8.59,16.58L13.17,12L8.59,7.42L10,6L16,12L10,18L8.59,16.58Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="calendar-container single-calendar" id="availabilityCalendar">
+                        <div style="text-align:center;color:var(--color-text-secondary);padding:var(--space-6);">⏳ Caricamento...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Form Card -->
+            <div class="card form-section">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                        </svg>
+                        Richiesta di Prenotazione — <span id="formAptName">...</span>
+                    </h2>
+                    <p class="card-subtitle" data-i18n="card_booking_sub">Compila il form per richiedere la tua prenotazione</p>
+                </div>
+                <div class="card-body">
+                    <!-- Banner tassa di soggiorno -->
+                    <div class="tourist-tax-banner">
+                        <h3>🏛️ <span data-i18n="tax_title">Tassa di Soggiorno — Comune di Vasto</span></h3>
+                        <p data-i18n="tax_body">La tassa di soggiorno è dovuta <strong>direttamente all'arrivo</strong> ed è esclusa dal prezzo indicato.<br>
+                        Stagione 2026 (1° aprile – 30 settembre): <strong>€ 2,00 per persona per notte</strong>, fino a un massimo di 10 pernottamenti consecutivi.<br>
+                        <strong>Esenti:</strong> minori di 14 anni.</p>
+                    </div>
+                    <p style="margin-bottom:16px; color:#ff8800; font-weight:bold;" id="aptRules">
+                        Prenotazione minima: 2 notti.<br>
+                        Nei mesi di Luglio e Agosto prenotazione minima di 5 notti.<br>
+                        Max 4 persone (adulti + bambini).
+                    </p>
+                    <form id="bookingForm" class="form-grid">
+                        <!-- Date Selection -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="checkIn" class="form-label" data-i18n="label_checkin">Check-in <span class="required">*</span></label>
+                                <input type="date" id="checkIn" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="checkOut" class="form-label" data-i18n="label_checkout">Check-out <span class="required">*</span></label>
+                                <input type="date" id="checkOut" class="form-input" required>
+                            </div>
+                        </div>
+
+                        <!-- Price Display -->
+                        <div class="price-display" id="priceDisplay">
+                            <h4 class="price-display-title">
+                                <svg class="icon" viewBox="0 0 24 24">
+                                    <path d="M7,15H9C9,16.08 10.37,17 12,17C13.63,17 15,16.08 15,15C15,13.9 13.96,13.5 11.76,12.97C9.64,12.44 7,11.78 7,9C7,7.21 8.47,5.69 10.5,5.18V3H13.5V5.18C15.53,5.69 17,7.21 17,9H15C15,7.92 13.63,7 12,7C10.37,7 9,7.92 9,9C9,10.1 10.04,10.5 12.24,11.03C14.36,11.56 17,12.22 17,15C17,16.79 15.53,18.31 13.5,18.82V21H10.5V18.82C8.47,18.31 7,16.79 7,15Z"/>
+                                </svg>
+                                Riepilogo Prezzo
+                            </h4>
+                            <div class="price-info" id="priceInfo"></div>
+                        </div>
+
+                        <!-- Guest Details - dinamico per appartamento -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="adults" class="form-label" data-i18n="label_adults">Adulti <span class="required">*</span></label>
+                                <select id="adults" class="form-input" required onchange="onGuestsChange()">
+                                    <!-- opzioni generate da updateGuestOptions() -->
+                                </select>
+                            </div>
+                            <div class="form-group" id="sofaBedGroup">
+                                <label for="sofaBed" class="form-label" id="sofaBedLabel">Sul divano letto</label>
+                                <select id="sofaBed" class="form-input" onchange="onGuestsChange()">
+                                    <!-- opzioni generate da updateGuestOptions() -->
+                                </select>
+                            </div>
+                        </div>
+                        <div id="bedsInfo" style="background:var(--color-bg-8);border-radius:var(--radius-base);padding:var(--space-3) var(--space-4);margin-top:-8px;margin-bottom:4px;font-size:var(--font-size-sm);color:var(--color-text-secondary);display:none;"></div>
+
+                        <!-- Biancheria -->
+                        <label class="linen-option" id="linenOptionLabel">
+                            <input type="checkbox" id="linenRequest" onchange="onLinenChange()">
+                            <div class="linen-option-text">
+                                <div class="linen-option-title">🛏️ <span data-i18n="linen_title">Richiesta Biancheria</span></div>
+                                <div class="linen-option-detail" id="linenDetail" data-i18n="linen_detail">Set lenzuola (€5/letto) + Set asciugamani (€5/persona)</div>
+                            </div>
+                            <div class="linen-option-price" id="linenPrice"></div>
+                        </label>
+
+                        <!-- Personal Information -->
+                        <div class="form-group">
+                            <label for="name" class="form-label" data-i18n="label_name">Nome Completo <span class="required">*</span></label>
+                            <input type="text" id="name" class="form-input" placeholder="Mario Rossi" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email" class="form-label" data-i18n="label_email">Email <span class="required">*</span></label>
+                                <input type="email" id="email" class="form-input" placeholder="mario.rossi@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="form-label" data-i18n="label_phone">Telefono <span class="required">*</span></label>
+                                <input type="tel" id="phone" class="form-input" placeholder="+39 333 1234567" required>
+                            </div>
+                        </div>
+
+                        <!-- Additional Notes -->
+                        <div class="form-group">
+                            <label for="notes" class="form-label" data-i18n="label_notes">Note o Richieste Particolari</label>
+                            <textarea id="notes" class="form-input form-textarea" placeholder="Eventuali richieste o informazioni aggiuntive..."></textarea>
+                        </div>
+
+                        <!-- Alert Messages -->
+                        <div class="alert" id="alert"></div>
+
+                        <!-- Loading Animation -->
+                        <div class="loading" id="loading">
+                            <div class="spinner"></div>
+                            <p class="loading-text" data-i18n="loading_text">Invio richiesta in corso...</p>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/>
+                            </svg>
+                            Invia Richiesta di Prenotazione
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // ============================================
+        // INTERNAZIONALIZZAZIONE (IT / EN)
+        // ============================================
+        let currentLang = 'it';
+
+        const i18n = {
+            it: {
+                // Overlay selezione
+                sel_title: 'Casa Vista Mare<br>Vasto Marina',
+                sel_subtitle: "Seleziona l'appartamento che desideri prenotare",
+                apt_desc_cvm: 'Appartamento — Vista mare',
+                apt_desc_cam: 'Appartamento al Mare',
+                apt_badge: 'Max 4 ospiti',
+                apt_badge_mono: 'Max 4 ospiti',
+                // Hero
+                hero_subtitle: 'Vasto Marina, Abruzzo',
+                change_apt: '🔄 Cambia appartamento',
+                // Calendario prezzi
+                card_cal_prices: 'Prezzi per notte',
+                card_cal_prices_sub: 'Seleziona le date direttamente dal calendario',
+                cal_hint_checkin: 'Clicca il giorno di arrivo (check-in)',
+                cal_hint_checkout: 'Ora clicca il giorno di partenza (check-out)',
+                cal_hint_done: 'Date selezionate — modifica cliccando di nuovo',
+                // Tassa di soggiorno
+                tax_title: 'Tassa di Soggiorno — Comune di Vasto',
+                tax_body: 'La tassa di soggiorno è dovuta <strong>direttamente all\'arrivo</strong> ed è esclusa dal prezzo indicato.<br>Stagione 2026 (1° aprile – 30 settembre): <strong>€ 2,00 per persona per notte</strong>, fino a un massimo di 10 pernottamenti consecutivi.<br><strong>Esenti:</strong> minori di 14 anni.',
+                // Calendario nav
+                prev_month: 'Precedente',
+                next_month: 'Successivo',
+                weekdays: ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'],
+                // Form
+                card_booking: 'Richiesta di Prenotazione — ',
+                card_booking_sub: 'Compila il form per richiedere la tua prenotazione',
+                label_checkin: 'Check-in',
+                label_checkout: 'Check-out',
+                label_adults: 'Adulti',
+                label_name: 'Nome Completo',
+                label_email: 'Email',
+                label_phone: 'Telefono',
+                label_notes: 'Note o Richieste Particolari',
+                placeholder_name: 'Mario Rossi',
+                placeholder_phone: '+39 333 1234567',
+                placeholder_notes: 'Eventuali richieste o informazioni aggiuntive...',
+                // Prezzo
+                price_summary: 'Riepilogo Prezzo',
+                price_nights: 'Notti',
+                price_avg: 'Prezzo medio per notte',
+                price_total: 'Totale',
+                // Bottone / loading
+                btn_submit: 'Invia Richiesta di Prenotazione',
+                loading_text: 'Invio richiesta in corso...',
+                // Regole
+                rules_apt: 'Prenotazione minima: 2 notti. Luglio/Agosto: minimo 5 notti.<br>Letto: 2 adulti base · 3 adulti +15% · 4 adulti +30% · Divano letto (140×188): bambini gratis',
+                rules_mono: 'Prenotazione minima: 2 notti. Luglio/Agosto: minimo 5 notti.<br>Letto: max 2 adulti (prezzo base) · Divano letto (140×188): bambini gratis oppure 1 adulto +15% / 2 adulti +30%',
+                // Opzioni ospiti
+                adults_base: 'prezzo base',
+                sofa_none: 'Nessuno',
+                sofa_1child: '1 bambino (gratis)',
+                sofa_2child: '2 bambini (gratis)',
+                sofa_1adult: '1 adulto (+15%)',
+                sofa_2adults: '2 adulti (+30%)',
+                sofa_label_apt: 'Bambini su divano letto',
+                sofa_label_mono: 'Sul divano letto',
+                sofa_no_child: 'Nessun bambino',
+                // Disponibilità
+                loading_calendar: '⏳ Caricamento prezzi...',
+                no_apt_selected: 'Seleziona un appartamento per vedere la disponibilità',
+                // Validazioni / alert
+                err_required: '⚠️ Compila tutti i campi obbligatori!',
+                err_dates_unavailable: '⚠️ Le date selezionate non sono disponibili!',
+                err_checkout_before: 'La data di check-out deve essere successiva al check-in',
+                err_dates_unavailable2: '⚠️ Le date selezionate non sono disponibili. Scegli altre date.',
+                err_max_adults: (apt, max) => `⚠️ ${apt}: massimo ${max} adulti sul letto.`,
+                err_min_nights: (n) => `⚠️ Prenotazione minima: ${n} notti nel periodo selezionato.`,
+                // Successo
+                ok_sent: (apt) => `✅ Richiesta inviata per ${apt}!`,
+                ok_message: 'Richiesta inviata! Riceverai conferma entro 24 ore via email.',
+                // Cambio appartamento
+                change_apt_btn: (apt) => `🔄 ${apt} — Cambia`,
+                // Biancheria
+                linen_title: 'Richiesta Biancheria',
+                linen_detail: 'Set lenzuola (€5/letto) + Set asciugamani (€5/persona)',
+                price_linen: 'Biancheria',
+            },
+            en: {
+                sel_title: 'Casa Vista Mare<br>Vasto Marina',
+                sel_subtitle: 'Select the apartment you wish to book',
+                apt_desc_cvm: 'Apartment — Sea view',
+                apt_desc_cam: 'Seaside Apartment',
+                apt_badge: 'Max 4 guests',
+                apt_badge_mono: 'Max 4 guests',
+                hero_subtitle: 'Vasto Marina, Abruzzo',
+                change_apt: '🔄 Change apartment',
+                card_cal_prices: 'Nightly Rates',
+                card_cal_prices_sub: 'Select your dates directly from the calendar',
+                cal_hint_checkin: 'Click your check-in date',
+                cal_hint_checkout: 'Now click your check-out date',
+                cal_hint_done: 'Dates selected — click again to change',
+                tax_title: 'Tourist Tax — Municipality of Vasto',
+                tax_body: 'The tourist tax is payable <strong>directly upon arrival</strong> and is not included in the quoted price.<br>Season 2026 (1 April – 30 September): <strong>€ 2.00 per person per night</strong>, up to a maximum of 10 consecutive nights.<br><strong>Exempt:</strong> children under 14.',
+                prev_month: 'Previous',
+                next_month: 'Next',
+                weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                card_booking: 'Booking Request — ',
+                card_booking_sub: 'Fill in the form to request your booking',
+                label_checkin: 'Check-in',
+                label_checkout: 'Check-out',
+                label_adults: 'Adults',
+                label_name: 'Full Name',
+                label_email: 'Email',
+                label_phone: 'Phone',
+                label_notes: 'Notes or Special Requests',
+                placeholder_name: 'John Smith',
+                placeholder_phone: '+39 333 1234567',
+                placeholder_notes: 'Any requests or additional information...',
+                price_summary: 'Price Summary',
+                price_nights: 'Nights',
+                price_avg: 'Average price per night',
+                price_total: 'Total',
+                btn_submit: 'Send Booking Request',
+                loading_text: 'Sending request...',
+                rules_apt: 'Minimum stay: 2 nights. July/August: minimum 5 nights.<br>Bed: 2 adults base · 3 adults +15% · 4 adults +30% · Sofa bed (140×188): children free',
+                rules_mono: 'Minimum stay: 2 nights. July/August: minimum 5 nights.<br>Bed: max 2 adults (base price) · Sofa bed (140×188): children free or 1 adult +15% / 2 adults +30%',
+                adults_base: 'base price',
+                sofa_none: 'Nobody',
+                sofa_1child: '1 child (free)',
+                sofa_2child: '2 children (free)',
+                sofa_1adult: '1 adult (+15%)',
+                sofa_2adults: '2 adults (+30%)',
+                sofa_label_apt: 'Children on sofa bed',
+                sofa_label_mono: 'On the sofa bed',
+                sofa_no_child: 'No children',
+                loading_calendar: '⏳ Loading prices...',
+                no_apt_selected: 'Select an apartment to see availability',
+                err_required: '⚠️ Please fill in all required fields!',
+                err_dates_unavailable: '⚠️ The selected dates are not available!',
+                err_checkout_before: 'Check-out date must be after check-in',
+                err_dates_unavailable2: '⚠️ Selected dates are not available. Please choose other dates.',
+                err_max_adults: (apt, max) => `⚠️ ${apt}: maximum ${max} adults on the bed.`,
+                err_min_nights: (n) => `⚠️ Minimum stay: ${n} nights for this period.`,
+                ok_sent: (apt) => `✅ Request sent for ${apt}!`,
+                ok_message: 'Request sent! You will receive confirmation within 24 hours by email.',
+                change_apt_btn: (apt) => `🔄 ${apt} — Change`,
+                // Linen
+                linen_title: 'Linen Request',
+                linen_detail: 'Sheet set (€5/bed) + Towel set (€5/person)',
+                price_linen: 'Linen',
+            }
+        };
+
+        function t(key, ...args) {
+            const val = i18n[currentLang][key];
+            return typeof val === 'function' ? val(...args) : (val !== undefined ? val : key);
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.getElementById('btnIT').classList.toggle('active', lang === 'it');
+            document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+            applyTranslations();
+            renderCalendar();
+            if (selectedApartment) updateGuestOptions();
+        }
+
+        function applyTranslations() {
+            const T = i18n[currentLang];
+            // Overlay
+            const titleEl = document.querySelector('.apt-sel-title');
+            if (titleEl) titleEl.innerHTML = T.sel_title;
+            document.querySelector('.apt-sel-subtitle').textContent = T.sel_subtitle;
+            const aptCards = document.querySelectorAll('.apt-card');
+            const descs = [T.apt_desc_cvm, T.apt_desc_cam];
+            const badges = [T.apt_badge, T.apt_badge_mono];
+            aptCards.forEach((card, i) => {
+                card.querySelector('.apt-card-desc').innerHTML = descs[i];
+                card.querySelector('.apt-card-badge').textContent = badges[i];
+            });
+            // Hero
+            document.querySelector('.hero-subtitle').textContent = T.hero_subtitle;
+            const changeBtn = document.getElementById('changeAptBtn');
+            if (changeBtn && selectedApartment) {
+                changeBtn.innerHTML = T.change_apt_btn(selectedApartment);
+            } else if (changeBtn) {
+                changeBtn.innerHTML = T.change_apt;
+            }
+            // data-i18n elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                const val = T[key];
+                if (val !== undefined) {
+                    // Per le label con <span class="required">, preserva l'asterisco
+                    if (el.querySelector('.required')) {
+                        const req = el.querySelector('.required').outerHTML;
+                        el.innerHTML = val + ' ' + req;
+                    } else if (el.querySelector('span') && el.tagName === 'H2') {
+                        // Card booking title: preserva lo span con il nome appartamento
+                        const span = el.querySelector('span');
+                        el.childNodes[0].textContent = val;
+                    } else {
+                        el.innerHTML = val;
+                    }
+                }
+            });
+            // Bottone nav mese
+            document.getElementById('prevMonthLabel').textContent = T.prev_month;
+            document.getElementById('nextMonthLabel').textContent = T.next_month;
+            // Hint calendario
+            if (pickingStep === 1) updateCalHint(T.cal_hint_checkout);
+            else if (pickingStep === 2) updateCalHint(T.cal_hint_done);
+            else updateCalHint(T.cal_hint_checkin);
+            // Tassa di soggiorno
+            const taxBody = document.querySelector('[data-i18n="tax_body"]');
+            if (taxBody) taxBody.innerHTML = T.tax_body;
+            // Placeholder
+            document.getElementById('name').placeholder = T.placeholder_name;
+            document.getElementById('phone').placeholder = T.placeholder_phone;
+            document.getElementById('notes').placeholder = T.placeholder_notes;
+            // Regole appartamento
+            if (selectedApartment) {
+                const cfg2 = APT_CONFIG[selectedApartment] || {};
+                const isMono = cfg2.type === 'mono';
+                document.getElementById('aptRules').innerHTML = isMono ? T.rules_mono : T.rules_apt;
+            }
+        }
+
+
+
+        // ============================================
+        // FUNZIONE DI UTILITÀ PER FORMATTARE DATE LOCALI
+        // ============================================
+        function formatDateLocal(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        let allPrices = {};
+        let selectedApartment = null;
+        const todayDate = new Date();
+        let currentMonth = new Date(todayDate.getFullYear(), todayDate.getMonth(), 1);
+        const startMonth = new Date(todayDate.getFullYear(), todayDate.getMonth(), 1);
+        const endMonth = new Date(2028, 11, 31);
+
+        // Selezione range dal calendario
+        let rangeStart = null; // stringa "YYYY-MM-DD"
+        let rangeEnd   = null;
+        let pickingStep = 0;   // 0=nessuno, 1=in attesa check-out, 2=completo
+
+        // ── Render calendario ──
+        function renderCalendar() {
+            const calendar = document.getElementById('availabilityCalendar');
+            if (!selectedApartment) {
+                calendar.innerHTML = `<div style="text-align:center;color:var(--color-text-secondary);padding:var(--space-6);">${t('no_apt_selected')}</div>`;
+                return;
+            }
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
+            const monthName   = currentMonth.toLocaleDateString(currentLang === 'en' ? 'en-US' : 'it-IT', { month: 'long', year: 'numeric' });
+            const isSummerMonth = currentMonth.getMonth() === 6 || currentMonth.getMonth() === 7;
+            const summerBadgeText = currentLang === 'en' ? 'min. 5 nights' : 'min. 5 notti';
+
+            document.getElementById('currentMonthDisplay').innerHTML = monthName +
+                (isSummerMonth ? `<span class="summer-badge">☀️ ${summerBadgeText}</span>` : '');
+            document.getElementById('prevMonthBtn').disabled = currentMonth <= startMonth;
+            document.getElementById('nextMonthBtn').disabled = currentMonth >= endMonth;
+
+            // Range start/end come date per confronto
+            const rsDate = rangeStart ? new Date(rangeStart) : null;
+            const reDate = rangeEnd   ? new Date(rangeEnd)   : null;
+
+            let html = '<div class="calendar-weekdays">';
+            t('weekdays').forEach(d => { html += `<div class="calendar-weekday">${d}</div>`; });
+            html += '</div><div class="calendar-grid">';
+
+            const firstDay = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).getDay();
+            const startDay = firstDay === 0 ? 6 : firstDay - 1;
+            for (let i = 0; i < startDay; i++) html += '<div></div>';
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+                date.setHours(0, 0, 0, 0);
+                const dateStr  = formatDateLocal(date);
+                const isPast   = date < today;
+                const price    = getPriceForDate(date);
+                const isSummer = date.getMonth() === 6 || date.getMonth() === 7;
+
+                let cls = 'calendar-day';
+                if (isPast) {
+                    cls += ' past';
+                } else {
+                    if (isSummer) cls += ' summer-day';
+                    // Selezione range
+                    if (rangeStart && dateStr === rangeStart) cls += ' selected-start';
+                    else if (rangeEnd && dateStr === rangeEnd) cls += ' selected-end';
+                    else if (rsDate && reDate && date > rsDate && date < reDate) cls += ' in-range';
+                }
+
+                const clickAttr = isPast ? '' : `onclick="onCalendarDayClick('${dateStr}')"`;
+                html += `
+                    <div class="${cls}" ${clickAttr} title="${dateStr}">
+                        <div class="calendar-day-number">${day}</div>
+                        <div class="calendar-day-price">€${price}</div>
+                    </div>`;
+            }
+            html += '</div>';
+            calendar.innerHTML = html;
+        }
+
+        function onCalendarDayClick(dateStr) {
+            if (!selectedApartment) return;
+            if (pickingStep === 0 || pickingStep === 2) {
+                // Inizia nuova selezione
+                rangeStart  = dateStr;
+                rangeEnd    = null;
+                pickingStep = 1;
+                updateCalHint(t('cal_hint_checkout'));
+            } else if (pickingStep === 1) {
+                if (dateStr <= rangeStart) {
+                    // Clic su data precedente o uguale → ri-inizia
+                    rangeStart  = dateStr;
+                    rangeEnd    = null;
+                    updateCalHint(t('cal_hint_checkout'));
+                } else {
+                    rangeEnd    = dateStr;
+                    pickingStep = 2;
+                    updateCalHint(t('cal_hint_done'));
+                    // Popola i campi del form
+                    document.getElementById('checkIn').value  = rangeStart;
+                    document.getElementById('checkOut').value = rangeEnd;
+                    calculatePriceOnChange();
+                    // Scroll al form
+                    document.getElementById('bookingForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            renderCalendar();
+        }
+
+        function updateCalHint(text) {
+            const el = document.getElementById('calHint');
+            if (el) el.textContent = text;
+        }
+
+        function nextMonth() {
+            if (currentMonth < endMonth) {
+                currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+                renderCalendar();
+            }
+        }
+
+        function prevMonth() {
+            if (currentMonth > startMonth) {
+                currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
+                renderCalendar();
+            }
+        }
+
+
+        // ── Selezione appartamento ──
+        // ── Configurazione per tipo appartamento ──
+        const APT_CONFIG = {
+            'Casa Vista Mare': { type: 'apt', maxAdults: 4, beds: 2, bedsDesc: '2 letti matrimoniali + divano letto (140×188)', displayName: 'Casa Vista Mare' },
+            'Casa al Mare':    { type: 'mono', maxAdults: 2, beds: 1, bedsDesc: '1 letto matrimoniale + divano letto (140×188)', displayName: 'Casa al Mare' },
+        };
+
+        // ── Calcolo maggiorazione ──
+        // Casa Vista Mare: basata sul totale adulti
+        // Casa al Mare: adulti letto sempre base; adulti divano +15%/+30%; bambini divano gratis
+        function getSurcharge() {
+            if (!selectedApartment) return 0;
+            const cfg = APT_CONFIG[selectedApartment];
+            const adults  = parseInt(document.getElementById('adults')?.value) || 1;
+            const sofaVal = document.getElementById('sofaBed')?.value || 'none';
+
+            if (cfg.type === 'mono') {
+                // Solo il divano genera maggiorazione (adulti), bambini = 0
+                if (sofaVal === '1adult') return 0.15;
+                if (sofaVal === '2adults') return 0.30;
+                return 0; // nessuno o bambini
+            } else {
+                // Casa Vista Mare: maggiorazione sul totale adulti
+                if (adults >= 4) return 0.30;
+                if (adults >= 3) return 0.15;
+                return 0;
+            }
+        }
+
+        function updateGuestOptions() {
+            if (!selectedApartment) return;
+            const cfg = APT_CONFIG[selectedApartment];
+
+            // ── Selettore adulti ──
+            const adultsEl  = document.getElementById('adults');
+            const prevAdults = parseInt(adultsEl.value) || (cfg.type === 'mono' ? 1 : 2);
+            adultsEl.innerHTML = '';
+
+            for (let i = 1; i <= cfg.maxAdults; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                if (cfg.type === 'mono') {
+                    opt.textContent = `${i} adult${i>1?(currentLang==='en'?'s':'i'):(currentLang==='en'?'':'o')} (${t('adults_base')})`;
+                } else {
+                    const s = i >= 4 ? '+30%' : i >= 3 ? '+15%' : t('adults_base');
+                    const word = currentLang === 'en' ? (i > 1 ? 'adults' : 'adult') : (i > 1 ? 'adulti' : 'adulto');
+                    opt.textContent = `${i} ${word} (${s})`;
+                }
+                if (i === Math.min(prevAdults, cfg.maxAdults)) opt.selected = true;
+                adultsEl.appendChild(opt);
+            }
+
+            // ── Selettore divano letto ──
+            const sofaEl    = document.getElementById('sofaBed');
+            const sofaGroup = document.getElementById('sofaBedGroup');
+            const sofaLabel = document.getElementById('sofaBedLabel');
+            const prevSofa  = sofaEl.value || 'none';
+            sofaEl.innerHTML = '';
+
+            if (cfg.type === 'mono') {
+                // Mono: 4 opzioni fisse
+                sofaLabel.innerHTML = t('sofa_label_mono') + ' <span style="color:var(--color-text-secondary);font-weight:400">(140×188)</span>';
+                const sofaOpts = [
+                    { value: 'none',    label: t('sofa_none') },
+                    { value: '1child',  label: t('sofa_1child') },
+                    { value: '2child',  label: t('sofa_2child') },
+                    { value: '1adult',  label: t('sofa_1adult') },
+                    { value: '2adults', label: t('sofa_2adults') },
+                ];
+                sofaOpts.forEach(o => {
+                    const opt = document.createElement('option');
+                    opt.value = o.value; opt.textContent = o.label;
+                    if (o.value === prevSofa) opt.selected = true;
+                    sofaEl.appendChild(opt);
+                });
+                sofaGroup.style.display = 'flex';
+            } else {
+                // Casa Vista Mare: divano solo per bambini (gratis)
+                sofaLabel.innerHTML = t('sofa_label_apt') + ' <span style="color:var(--color-text-secondary);font-weight:400">(gratis)</span>';
+                const sofaOpts = [
+                    { value: 'none',   label: t('sofa_no_child') },
+                    { value: '1child', label: t('sofa_1child') },
+                    { value: '2child', label: t('sofa_2child') },
+                ];
+                sofaOpts.forEach(o => {
+                    const opt = document.createElement('option');
+                    opt.value = o.value; opt.textContent = o.label;
+                    if (o.value === prevSofa) opt.selected = true;
+                    sofaEl.appendChild(opt);
+                });
+                sofaGroup.style.display = 'flex';
+            }
+
+            // ── Info letti ──
+            document.getElementById('bedsInfo').style.display = 'block';
+            document.getElementById('bedsInfo').innerHTML = '🛏️ ' + cfg.bedsDesc;
+        }
+
+        function onGuestsChange() {
+            calculatePriceOnChange();
+            updateLinenPrice();
+        }
+
+        function selectApartment(aptName) {
+            selectedApartment = aptName;
+            document.getElementById('aptSelectionOverlay').classList.add('hidden');
+            const displayName = (APT_CONFIG[aptName] && APT_CONFIG[aptName].displayName) ? APT_CONFIG[aptName].displayName : aptName;
+            document.getElementById('heroTitle').textContent = '🏖️ Casa Vista Mare — ' + displayName;
+            document.getElementById('formAptName').textContent = displayName;
+            document.getElementById('changeAptBtn').innerHTML = t('change_apt_btn', displayName);
+
+            updateGuestOptions();
+
+            const cfg = APT_CONFIG[aptName];
+            const isMono = (cfg.type === 'mono');
+            document.getElementById('aptRules').innerHTML = isMono ? t('rules_mono') : t('rules_apt');
+
+            // Reset form e selezione range
+            document.getElementById('bookingForm').reset();
+            document.getElementById('priceDisplay').classList.remove('show');
+            rangeStart  = null;
+            rangeEnd    = null;
+            pickingStep = 0;
+            updateCalHint(t('cal_hint_checkin'));
+            updateGuestOptions();
+
+            loadPricesFromSheet();
+            setMinDates();
+            renderCalendar();
+        }
+
+        function changeApartment() {
+            selectedApartment = null;
+            document.getElementById('aptSelectionOverlay').classList.remove('hidden');
+            allPrices     = {};
+            rangeStart  = null;
+            rangeEnd    = null;
+            pickingStep = 0;
+            document.getElementById('bookingForm').reset();
+            document.getElementById('priceDisplay').classList.remove('show');
+            renderCalendar();
+        }
+
+        // Non carica all'avvio: aspetta la selezione appartamento
+        window.addEventListener('load', function() {
+            // La selezione appartamento gestisce il caricamento
+        });
+
+        // FUNZIONE: Carica prezzi dal Google Sheet (nuovo formato dizionario)
+        function loadPricesFromSheet() {
+            console.log('Caricamento prezzi per:', selectedApartment);
+            if (!selectedApartment) return;
+            
+            if (typeof google !== 'undefined' && google.script) {
+                google.script.run
+                    .withSuccessHandler(function(prices) {
+                        allPrices = prices;
+                        renderCalendar();
+                    })
+                    .withFailureHandler(function(error) {
+                        console.error('Errore caricamento prezzi:', error);
+                        allPrices = getMockPrices();
+                        renderCalendar();
+                    })
+                    .getAllPrices(selectedApartment);
+            } else {
+                allPrices = getMockPrices();
+                renderCalendar();
+            }
+        }
+
+        // Dati mock per test (formato nuovo: dizionario giornaliero)
+        function getMockPrices() {
+            var mock = {};
+            var start = new Date(2025, 0, 1);
+            var end   = new Date(2028, 11, 31);
+            var cur   = new Date(start);
+            while (cur <= end) {
+                var ds = formatDateLocal(cur);
+                var m  = cur.getMonth(); // 0=Gen
+                var wd = cur.getDay();   // 0=Dom, 6=Sab
+                var isWeekend = (wd === 0 || wd === 6);
+                // Prezzo base per stagione
+                var base = 60;
+                if (m >= 5 && m <= 8) base = 110; // estate
+                else if (m === 4 || m === 9) base = 80; // spalla
+                // Maggiorazione weekend
+                if (isWeekend) base = Math.round(base * 1.20);
+                mock[ds] = base;
+                cur.setDate(cur.getDate() + 1);
+            }
+            return mock;
+        }
+
+        // FUNZIONE: Ottieni prezzo per una data specifica
+        function getPriceForDate(date) {
+            const dateStr = formatDateLocal(date);
+            if (allPrices[dateStr]) return allPrices[dateStr];
+            return 60;
+        }
+
+        function setMinDates() {
+            const today = new Date();
+            const todayStr = formatDateLocal(today);
+            const maxDate = new Date(2028, 11, 31);
+            const maxDateStr = formatDateLocal(maxDate);
+            
+            document.getElementById('checkIn').min = todayStr;
+            document.getElementById('checkOut').min = todayStr;
+            document.getElementById('checkIn').max = maxDateStr;
+            document.getElementById('checkOut').max = maxDateStr;
+        }
+
+        document.getElementById('checkIn').addEventListener('change', calculatePriceOnChange);
+        document.getElementById('checkOut').addEventListener('change', calculatePriceOnChange);
+
+        // FUNZIONE: Calcola prezzo - richiede date E selezione ospiti
+        function calculatePriceOnChange() {
+            const checkIn  = document.getElementById('checkIn').value;
+            const checkOut = document.getElementById('checkOut').value;
+            const adults   = document.getElementById('adults')?.value;
+
+            // Nascondi prezzo se mancano date o persone
+            if (!checkIn || !checkOut || !adults || !selectedApartment) {
+                document.getElementById('priceDisplay').classList.remove('show');
+                return;
+            }
+
+            if (new Date(checkOut) <= new Date(checkIn)) {
+                showAlert(t('err_checkout_before'), 'error');
+                document.getElementById('priceDisplay').classList.remove('show');
+                return;
+            }
+
+            const result = calculatePriceLocal(checkIn, checkOut);
+            displayPriceBreakdown(result);
+            updateLinenPrice();
+        }
+
+        // FUNZIONE: Calcola costo biancheria
+        function calcLinenCost() {
+            const cfg = APT_CONFIG[selectedApartment];
+            if (!cfg) return 0;
+            const beds = cfg.beds || 1;
+            const adults = parseInt(document.getElementById('adults')?.value) || 0;
+            const sofaVal = document.getElementById('sofaBed')?.value || 'none';
+            const sofaPersons = sofaVal === '2adults' ? 2 : sofaVal === '1adult' ? 1 : sofaVal === '2child' ? 2 : sofaVal === '1child' ? 1 : 0;
+            const totalPersons = adults + sofaPersons;
+            return (beds * 5) + (totalPersons * 5);
+        }
+
+        // FUNZIONE: Aggiorna etichetta prezzo biancheria nella checkbox
+        function updateLinenPrice() {
+            const linenPrice = document.getElementById('linenPrice');
+            const linenCheck = document.getElementById('linenRequest');
+            if (!selectedApartment) { linenPrice.textContent = ''; return; }
+            const cost = calcLinenCost();
+            linenPrice.textContent = linenCheck.checked ? `+€${cost}` : `€${cost}`;
+            // Ricalcola il breakdown se il checkbox è già spuntato
+            const checkIn  = document.getElementById('checkIn').value;
+            const checkOut = document.getElementById('checkOut').value;
+            if (checkIn && checkOut && new Date(checkOut) > new Date(checkIn)) {
+                const result = calculatePriceLocal(checkIn, checkOut);
+                displayPriceBreakdown(result);
+            }
+        }
+
+        // FUNZIONE: Handler cambio checkbox biancheria
+        function onLinenChange() {
+            updateLinenPrice();
+        }
+
+        // FUNZIONE: Mostra il breakdown del prezzo
+        function displayPriceBreakdown(result) {
+            const priceInfo = document.getElementById('priceInfo');
+            const linenChecked = document.getElementById('linenRequest')?.checked;
+            const linenCost = linenChecked ? calcLinenCost() : 0;
+            const grandTotal = result.totalPrice + linenCost;
+            
+            let breakdown = '';
+            if (result.breakdown && result.breakdown.length > 0) {
+                breakdown = '<div style="margin-bottom: var(--space-2); font-size: var(--font-size-sm);">';
+                result.breakdown.forEach(day => {
+                    breakdown += `${formatDateShort(day.date)}: €${day.price}<br>`;
+                });
+                breakdown += '</div>';
+            }
+
+            let linenRow = '';
+            if (linenChecked && linenCost > 0) {
+                linenRow = `<div style="margin-bottom:var(--space-2);font-size:var(--font-size-sm);">🛏️ ${t('price_linen')}: <strong>€${linenCost}</strong></div>`;
+            }
+            
+            priceInfo.innerHTML = `
+                <div style="margin-bottom: var(--space-3);">
+                    <strong>📅 ${t('price_nights')}:</strong> ${result.nights}<br>
+                    <strong>💶 ${t('price_avg')}:</strong> €${result.averagePrice}
+                </div>
+                ${breakdown}
+                ${linenRow}
+                <div class="price-total">${t('price_total')}: €${grandTotal}</div>
+            `;
+            document.getElementById('priceDisplay').classList.add('show');
+        }
+
+        // FUNZIONE: Calcola prezzo locale (VERSIONE CORRETTA CON FUSO ORARIO LOCALE)
+        function calculatePriceLocal(checkIn, checkOut) {
+            const start = new Date(checkIn);
+            const end   = new Date(checkOut);
+            start.setHours(0, 0, 0, 0);
+            end.setHours(0, 0, 0, 0);
+
+            const nights     = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+            const surcharge  = getSurcharge();
+            const multiplier = 1 + surcharge;
+
+            let totalPrice = 0;
+            let breakdown  = [];
+            let current    = new Date(start);
+
+            while (current < end) {
+                const basePrice = getPriceForDate(current);
+                const price     = basePrice * multiplier;
+                const dateStr   = formatDateLocal(current);
+
+                totalPrice += price;
+                breakdown.push({
+                    date:  dateStr,
+                    price: Math.round(price)
+                });
+                current.setDate(current.getDate() + 1);
+            }
+
+            totalPrice = Math.round(totalPrice);
+
+            return {
+                nights:       nights,
+                totalPrice:   totalPrice,
+                averagePrice: Math.round(totalPrice / nights),
+                breakdown:    breakdown,
+                surcharge:    surcharge,
+                success:      true
+            };
+        }
+
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const checkIn = document.getElementById('checkIn').value;
+            const checkOut = document.getElementById('checkOut').value;
+            const adults = parseInt(document.getElementById('adults').value) || 0;
+            const sofaVal    = document.getElementById('sofaBed')?.value || 'none';
+            const children   = sofaVal === '2child' ? 2 : sofaVal === '1child' ? 1 : 0;
+            const sofaAdults = sofaVal === '2adults' ? 2 : sofaVal === '1adult' ? 1 : 0;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const notes = document.getElementById('notes').value;
+            const linenRequested = document.getElementById('linenRequest')?.checked || false;
+
+            // Validazione campi
+            if (!checkIn || !checkOut || !adults || !name || !email || !phone) {
+                showAlert(t('err_required'), 'error');
+                return;
+            }
+
+            if (new Date(checkOut) <= new Date(checkIn)) {
+                showAlert(t('err_checkout_before'), 'error');
+                return;
+            }
+
+            // Validazione ospiti
+            const cfg = APT_CONFIG[selectedApartment] || { maxAdults: 4 };
+            if (adults > cfg.maxAdults) {
+                showAlert(t('err_max_adults', selectedApartment, cfg.maxAdults), 'error');
+                return;
+            }
+
+            const result = calculatePriceLocal(checkIn, checkOut);
+            const linenCost = linenRequested ? calcLinenCost() : 0;
+            const grandTotal = result.totalPrice + linenCost;
+
+            console.log('Dati da inviare:', {
+                checkIn, checkOut, adults, children, name, email, phone, notes,
+                linenRequested, linenCost,
+                totalPrice: grandTotal,
+                breakdown: result.breakdown
+            });
+
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('submitBtn').disabled = true;
+
+            if (typeof google !== 'undefined' && google.script) {
+                google.script.run
+                    .withSuccessHandler(function(response) {
+                        console.log('Risposta ricevuta:', response);
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('submitBtn').disabled = false;
+
+                        if (response && response.success) {
+                            showAlert('✅ ' + response.message, 'success');
+                            document.getElementById('bookingForm').reset();
+                            document.getElementById('priceDisplay').classList.remove('show');
+                            document.getElementById('linenPrice').textContent = '';
+                        } else {
+                            showAlert('❌ ' + (response ? response.message : 'Errore sconosciuto'), 'error');
+                        }
+                    })
+                    .withFailureHandler(function(error) {
+                        console.error('Errore invio:', error);
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('submitBtn').disabled = false;
+                        showAlert('❌ Errore durante l\'invio: ' + error.message, 'error');
+                    })
+                    .createBooking(
+                        selectedApartment,
+                        checkIn,
+                        checkOut,
+                        name,
+                        email,
+                        phone,
+                        adults,
+                        children,
+                        sofaAdults,
+                        sofaVal,
+                        notes,
+                        grandTotal,
+                        JSON.stringify(result.breakdown),
+                        linenRequested,
+                        linenCost
+                    );
+            } else {
+                // Modalità test
+                setTimeout(function() {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('submitBtn').disabled = false;
+                    showAlert(t('ok_sent', selectedApartment), 'success');
+                    document.getElementById('bookingForm').reset();
+                    document.getElementById('priceDisplay').classList.remove('show');
+                    document.getElementById('linenPrice').textContent = '';
+                }, 2000);
+            }
+        });
+
+        function showAlert(message, type) {
+            const alert = document.getElementById('alert');
+            alert.className = 'alert show alert-' + type;
+            alert.textContent = message;
+            alert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            setTimeout(() => alert.classList.remove('show'), 8000);
+        }
+
+        function formatDateShort(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('it-IT', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        }
+    </script>
+</body>
+</html>
