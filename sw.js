@@ -1,34 +1,17 @@
-const CACHE_NAME = 'casamare-v1';
-const ASSETS = [
-  './',
-  './index.html',
-  './manifest.json',
-  './icon-192.png',
-  './icon-512.png'
-];
+// Service worker minimale per Casa Vista Mare - Prenotazioni
+// Serve SOLO a rendere installabile la PWA.
+// NON mette nulla in cache: ogni richiesta va sempre alla rete,
+// cosi' i prezzi e i dati sono sempre aggiornati.
 
-self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
-  );
+self.addEventListener('install', function(e) {
   self.skipWaiting();
 });
 
-self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-    )
-  );
-  self.clients.claim();
+self.addEventListener('activate', function(e) {
+  e.waitUntil(self.clients.claim());
 });
 
-self.addEventListener('fetch', e => {
-  // Per le chiamate ad Apps Script usa sempre la rete
-  if (e.request.url.includes('script.google.com')) {
-    return;
-  }
-  e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request))
-  );
+self.addEventListener('fetch', function(e) {
+  // Passa sempre tutto alla rete, niente cache
+  e.respondWith(fetch(e.request));
 });
