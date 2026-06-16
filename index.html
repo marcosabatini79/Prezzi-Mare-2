@@ -17,9 +17,14 @@
   </style>
 </head>
 <body>
-  <iframe src="https://script.google.com/macros/s/AKfycbxr0w5j5T5cJjOcuY7XYuDEXkR-73We3CES-MTETR5D9tG5SFC9Rxe1hdAPZN9uGwabGA/exec"></iframe>
+  <iframe id="app"></iframe>
   <script>
-    // Questo codice attiva la possibilità di installare l'app
+    // URL della web app Apps Script (distribuzione)
+    var APP_URL = 'https://script.google.com/macros/s/AKfycbxr0w5j5T5cJjOcuY7XYuDEXkR-73We3CES-MTETR5D9tG5SFC9Rxe1hdAPZN9uGwabGA/exec';
+    // Parametro anti-cache: forza il ricaricamento fresco a ogni apertura
+    document.getElementById('app').src = APP_URL + '?v=' + Date.now();
+
+    // Service worker per l'installabilita' (NON mette in cache l'app)
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js')
         .then(() => console.log('PWA configurata con successo.'))
